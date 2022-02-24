@@ -11,14 +11,23 @@ import claimGogoroNFT from '../transactions/claimGogoroNFT'
 
 const SendTransaction = () => {
   const [status, setStatus] = useState("Not started")
+  const [redeemCode, setRedeemCode] = useState(null)
   const [transaction, setTransaction] = useState(null)
+
+  const updateRedeemCode = (event) => {
+    event.preventDefault();
+
+    setRedeemCode(event.target.value)
+  }
 
   const sendTransaction = async (event) => {
     event.preventDefault()
 
-    setStatus("Resolving...")
+    if (!redeemCode) {
+      return
+    }
 
-    const redeemCode = '18c133a5-268e-4e04-8b7a-07aa4f9da9a5'
+    setStatus("Resolving...")
 
     try {
       // redeemInfo
@@ -28,7 +37,7 @@ const SendTransaction = () => {
       //   nftID: the corresponding NFT ID for this redeem code
       // }
       const redeemInfo = await fetch(
-        `http://localhost:8702/api/gogoro/check-code`,
+        `https://flow-wallet.blocto.app/api/gogoro/check-code`,
         {
           method: 'POST',
           headers: {
@@ -99,6 +108,11 @@ const SendTransaction = () => {
       <Header>領取 NFT</Header>
 
       <Code>{claimGogoroNFT}</Code>
+
+      <input
+        placeholder="Redeem Code"
+        onChange={updateRedeemCode}
+      />
 
       <button onClick={sendTransaction}>
         領取 NFT

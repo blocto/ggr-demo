@@ -54,7 +54,7 @@ const SendTransaction = () => {
 
   return (
     <Card>
-      <Header>歸還 NFT (測試用)</Header>
+      <Header>歸還全部 NFT (測試用)</Header>
 
       <Code>{returnGogoroNFT}</Code>
 
