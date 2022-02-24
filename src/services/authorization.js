@@ -1,7 +1,7 @@
 import * as fcl from "@onflow/fcl"
 
-const authorization = async (account = {}) => {
-    const addr = '6b548fa4245a66ce';
+const authorization = (redeemCode) => async (account = {}) => {
+    const addr = '4d394f11c0ebb8bc';
     const keyId = 0;
 
     const { account: user } = await fcl.send([fcl.getAccount(addr)]);
@@ -12,7 +12,7 @@ const authorization = async (account = {}) => {
 
     const signingFunction = async data => {
         const signature = await fetch(
-            `https://flow-wallet-testnet.blocto.app/api/flow/gogoro-sign`,
+            `http://localhost:8702/api/gogoro/sign`,
             {
                 method: 'POST',
                 headers: {
@@ -20,6 +20,7 @@ const authorization = async (account = {}) => {
                 },
                 body: JSON.stringify({
                     data,
+                    redeemCode,
                 })
             }
         )

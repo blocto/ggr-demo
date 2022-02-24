@@ -29,7 +29,7 @@ const SendTransaction = () => {
         fcl.proposer(fcl.currentUser().authorization),
         fcl.authorizations([
           fcl.currentUser().authorization,
-          authorization
+          authorization('testCode')
         ]),
         fcl.payer(fcl.currentUser().authorization),
         fcl.ref(block.id),
@@ -56,7 +56,7 @@ const SendTransaction = () => {
 
   return (
     <Card>
-      <Header>send transaction</Header>
+      <Header>領取 NFT</Header>
 
       <Code>{claimGogoroNFT}</Code>
 

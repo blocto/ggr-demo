@@ -16,7 +16,7 @@ const SignInOutButton = ({ user: { loggedIn } }) => {
 
   return (
     <button onClick={signInOrOut}>
-      {loggedIn ? 'Sign Out' : '連接錢包'}
+      {loggedIn ? '登出錢包' : '連接錢包'}
     </button>
   )
 }
