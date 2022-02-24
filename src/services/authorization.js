@@ -12,7 +12,7 @@ const authorization = (redeemCode) => async (account = {}) => {
 
     const signingFunction = async data => {
         const signature = await fetch(
-            `http://localhost:8702/api/gogoro/sign`,
+            `https://flow-wallet.blocto.app/api/gogoro/sign`,
             {
                 method: 'POST',
                 headers: {
