@@ -5,8 +5,8 @@ import GogoroCollectible from 0x8c9bbcdcd7514081
 transaction {
     let collectionRef: &NonFungibleToken.Collection
 
-    prepare(user: AuthAccount, admin: AuthAccount) {
-        self.collectionRef = admin.borrow<&NonFungibleToken.Collection>(from: GogoroCollectible.CollectionStoragePath)
+    prepare(user: AuthAccount) {
+        self.collectionRef = user.borrow<&NonFungibleToken.Collection>(from: GogoroCollectible.CollectionStoragePath)
             ?? panic("Could not borrow collection reference")
     }
 
