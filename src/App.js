@@ -5,7 +5,8 @@ import Section from './components/Section'
 import Header from './components/Header'
 
 import Authenticate from './demo/Authenticate'
-import SendTransaction from './demo/SendTransaction'
+import ClaimNFT from './demo/ClaimNFT'
+import ReturnNFT from './demo/ReturnNFT'
 
 const Wrapper = styled.div`
   font-size: 13px;
@@ -18,7 +19,8 @@ function App() {
       <Section>
         <Header>NFT 領取範例</Header>
         <Authenticate />
-        <SendTransaction />
+        <ClaimNFT />
+        <ReturnNFT />
       </Section>
     </Wrapper>
   );

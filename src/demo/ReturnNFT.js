@@ -5,8 +5,7 @@ import Card from '../components/Card'
 import Header from '../components/Header'
 import Code from '../components/Code'
 
-import authorization from '../services/authorization'
-import claimGogoroNFT from '../transactions/claimGogoroNFT'
+import returnGogoroNFT from '../transactions/returnGogoroNFT'
 
 const SendTransaction = () => {
   const [status, setStatus] = useState("Not started")
@@ -17,19 +16,18 @@ const SendTransaction = () => {
 
     setStatus("Resolving...")
 
-    const blockResponse = await fcl.send([
-      fcl.getLatestBlock(),
-    ])
-
-    const block = await fcl.decode(blockResponse)
-
     try {
+      const blockResponse = await fcl.send([
+        fcl.getLatestBlock(),
+      ])
+
+      const block = await fcl.decode(blockResponse)
+
       const { transactionId } = await fcl.send([
-        fcl.transaction(claimGogoroNFT),
+        fcl.transaction(returnGogoroNFT),
         fcl.proposer(fcl.currentUser().authorization),
         fcl.authorizations([
-          fcl.currentUser().authorization,
-          authorization('testCode')
+          fcl.currentUser().authorization
         ]),
         fcl.payer(fcl.currentUser().authorization),
         fcl.ref(block.id),
@@ -56,12 +54,12 @@ const SendTransaction = () => {
 
   return (
     <Card>
-      <Header>領取 NFT</Header>
+      <Header>歸還 NFT (測試用)</Header>
 
-      <Code>{claimGogoroNFT}</Code>
+      <Code>{returnGogoroNFT}</Code>
 
       <button onClick={sendTransaction}>
-        領取 NFT
+        歸還 NFT
       </button>
 
       <Code>Status: {status}</Code>
