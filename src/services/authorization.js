@@ -1,8 +1,8 @@
 import * as fcl from "@onflow/fcl"
 
 const authorization = (redeemCode) => async (account = {}) => {
-    const addr = '4d394f11c0ebb8bc';
-    const keyId = 0;
+    const addr = '8c9bbcdcd7514081';
+    const keyId = 1;
 
     const { account: user } = await fcl.send([fcl.getAccount(addr)]);
 

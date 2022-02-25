@@ -3,15 +3,15 @@ import NonFungibleToken from 0x1d7e57aa55817448
 import GogoroCollectible from 0x8c9bbcdcd7514081
 import BloctoStorageRent from 0x1dfd1e5b87b847dc
 
-transaction(nftID: UInt64) {
-    let sentNFT: @NonFungibleToken.NFT
+transaction(itemID: UInt64, codeHash: String) {
+    let minter: &GogoroCollectible.Admin
     let userAddress: Address
 
     prepare(user: AuthAccount, admin: AuthAccount) {
-        let collectionRef = admin.borrow<&NonFungibleToken.Collection>(from: GogoroCollectible.CollectionStoragePath)
-            ?? panic("Could not borrow collection reference")
+        self.minter = admin
+            .borrow<&GogoroCollectible.Admin>(from: GogoroCollectible.AdminStoragePath)
+            ?? panic("admin account is not the minter")
 
-        self.sentNFT <- collectionRef.withdraw(withdrawID: nftID)
         self.userAddress = user.address
 
         // If user does not have Gogoro enabled yet, enable now
@@ -33,7 +33,7 @@ transaction(nftID: UInt64) {
             .borrow<&{NonFungibleToken.CollectionPublic}>()
             ?? panic("Could not borrow receiver reference to the user's collection")
 
-        receiverRef.deposit(token: <-self.sentNFT)
+        self.minter.mintNFT(recipient: receiverRef, itemID: itemID, codeHash: codeHash)
 
         // Replenish storage fee
         BloctoStorageRent.tryRefill(self.userAddress)

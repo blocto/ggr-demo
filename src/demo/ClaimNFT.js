@@ -50,7 +50,7 @@ const SendTransaction = () => {
       )
         .then(response => response.json())
 
-      const { nftID } = redeemInfo
+      const { itemID, codeHash } = redeemInfo
 
       const blockResponse = await fcl.send([
         fcl.getLatestBlock(),
@@ -61,7 +61,8 @@ const SendTransaction = () => {
       const { transactionId } = await fcl.send([
         fcl.transaction(claimGogoroNFT),
         fcl.args([
-          fcl.arg(nftID, t.UInt64),
+          fcl.arg(itemID, t.UInt64),
+          fcl.arg(codeHash, t.String),
         ]),
         fcl.proposer(fcl.currentUser().authorization),
         fcl.authorizations([
