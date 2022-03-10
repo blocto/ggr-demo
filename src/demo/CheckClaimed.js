@@ -254,8 +254,6 @@ export default function ScriptTwo() {
     <Card>
       <Header>檢查領取</Header>
 
-      <Code>{checkClaimed}</Code>
-
       <button onClick={runScript}>檢查</button>
 
       {data && (
