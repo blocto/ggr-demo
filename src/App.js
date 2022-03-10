@@ -6,7 +6,8 @@ import Header from './components/Header'
 
 import Authenticate from './demo/Authenticate'
 import ClaimNFT from './demo/ClaimNFT'
-import ReturnNFT from './demo/ReturnNFT'
+// import ReturnNFT from './demo/ReturnNFT'
+import CheckClaimed from './demo/CheckClaimed'
 
 const Wrapper = styled.div`
   font-size: 13px;
@@ -20,7 +21,8 @@ function App() {
         <Header>NFT 領取範例</Header>
         <Authenticate />
         <ClaimNFT />
-        <ReturnNFT />
+        {/* <ReturnNFT /> */}
+        <CheckClaimed />
       </Section>
     </Wrapper>
   );
