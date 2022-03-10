@@ -262,7 +262,7 @@ export default function ScriptTwo() {
         <Code>
           {data.map((item, index) => (
             <div key={index}>
-              {JSON.stringify(item, null, 2)}
+              {item ? 'yes' : '-'}
             </div>
           ))}
         </Code>
